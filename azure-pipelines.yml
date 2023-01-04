@@ -1,0 +1,36 @@
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: ubuntu-20.04
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+  - task: JFrogGenericArtifacts@1
+    displayName: JFrog Generic Artifacts Download
+    inputs:
+      command: Download
+      connection: 1c92338a-84b0-463f-8d9b-4a9429deaa24
+      fileSpec: >-
+        {
+          "files": [
+            {
+              "pattern": "devopsrbapoc-generic-local/spring-boot-2.6.9.jar",
+              "target": "devopsrbapoc-generic-local/"
+            }
+          ]
+        }
+  - task: Docker@0
+    displayName: build
+    inputs:
+      azureSubscriptionEndpoint: 7716be7b-283b-41a7-800e-30522542cc76
+      azureContainerRegistry: '{"loginServer":"acr5000.azurecr.io", "id" : "/subscriptions/579ac225-23b7-4453-9785-6042f2570fe8/resourceGroups/Rg-tp-con-enw-cs-aue1/providers/Microsoft.ContainerRegistry/registries/ACR5000"}'
+      dockerFile: dockerfile1
+  - task: Docker@0
+    displayName: Push
+    inputs:
+      azureSubscriptionEndpoint: 7716be7b-283b-41a7-800e-30522542cc76
+      azureContainerRegistry: '{"loginServer":"acr5000.azurecr.io", "id" : "/subscriptions/579ac225-23b7-4453-9785-6042f2570fe8/resourceGroups/Rg-tp-con-enw-cs-aue1/providers/Microsoft.ContainerRegistry/registries/ACR5000"}'
+      action: Push an image
+...
