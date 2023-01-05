@@ -33,7 +33,6 @@ jobs:
       azureSubscriptionEndpoint: 7716be7b-283b-41a7-800e-30522542cc76
       azureContainerRegistry: '{"loginServer":"acr5000.azurecr.io", "id" : "/subscriptions/579ac225-23b7-4453-9785-6042f2570fe8/resourceGroups/Rg-tp-con-enw-cs-aue1/providers/Microsoft.ContainerRegistry/registries/ACR5000"}'
       action: Push an image
-  steps:
   - task: Docker@0
     displayName: 'Run a Docker command'
     inputs:
