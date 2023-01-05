@@ -2,7 +2,7 @@ jobs:
 - job: Job_1
   displayName: Agent job 1
   pool:
-    vmImage: ubuntu-20.04
+    name: Azure-Infra_Pool
   steps:
   - checkout: self
     clean: true
@@ -27,6 +27,7 @@ jobs:
       azureSubscriptionEndpoint: 7716be7b-283b-41a7-800e-30522542cc76
       azureContainerRegistry: '{"loginServer":"acr5000.azurecr.io", "id" : "/subscriptions/579ac225-23b7-4453-9785-6042f2570fe8/resourceGroups/Rg-tp-con-enw-cs-aue1/providers/Microsoft.ContainerRegistry/registries/ACR5000"}'
       dockerFile: dockerfile
+      imageName: $(Build.Repository.Name):$(Build.BuildId)
   - task: Docker@0
     displayName: Push
     inputs:
@@ -34,10 +35,10 @@ jobs:
       azureContainerRegistry: '{"loginServer":"acr5000.azurecr.io", "id" : "/subscriptions/579ac225-23b7-4453-9785-6042f2570fe8/resourceGroups/Rg-tp-con-enw-cs-aue1/providers/Microsoft.ContainerRegistry/registries/ACR5000"}'
       action: Push an image
   - task: Docker@0
-    displayName: 'Run a Docker command'
+    displayName: Run a Docker command
     inputs:
-      azureSubscription: 'Azure-Infra-Terraform'
+      azureSubscription: Azure-Infra-Terraform
       azureContainerRegistry: '{"loginServer":"acr5000.azurecr.io", "id" : "/subscriptions/579ac225-23b7-4453-9785-6042f2570fe8/resourceGroups/Rg-tp-con-enw-cs-aue1/providers/Microsoft.ContainerRegistry/registries/ACR5000"}'
-      action: 'Run a Docker command'
-      customCommand: 'save -o /tmp/spring-boot-2.6.9.tar  acr5000.azurecr.io/pasikantikarthik/devopsrbapoc:$(Build.BuildNumber)'
+      action: Run a Docker command
+      customCommand: save -o /tmp/spring-boot-2.6.9.tar  acr5000.azurecr.io/pasikantikarthik/devopsrbapoc:$(Build.BuildNumber)
 ...
