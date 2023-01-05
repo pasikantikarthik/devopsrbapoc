@@ -2,7 +2,7 @@ jobs:
 - job: Job_1
   displayName: Agent job 1
   pool:
-    name: Azure-Infra_Pool
+    vmImage: ubuntu-20.04
   steps:
   - checkout: self
     clean: true
