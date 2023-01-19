@@ -1,0 +1,31 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  name: Azure-Infra_Pool
+
+steps:
+- task: Docker@2
+  inputs:
+    command: login
+    containerRegistry: acr-connection
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'Azure-Infra-Terraform'
+    KeyVaultName: 'devopspockv'
+    SecretsFilter: '*'
+    RunAsPreJob: true
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello world'
+      echo '$(mykey1)'
