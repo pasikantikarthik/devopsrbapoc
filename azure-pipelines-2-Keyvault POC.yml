@@ -35,7 +35,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: secret.txt
+    Contents: certdemo.crt
     targetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
