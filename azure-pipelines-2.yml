@@ -39,7 +39,7 @@ steps:
   inputs:
     command: build
     Dockerfile: '$(System.DefaultWorkingDirectory)/tmp/dockerfile'
-    containerRegistry: $(docker_Registry_service_Connection)
+    containerRegistry: rba_jfrog_repo
     repository: 'dockerimages/dummyimage'
     tags: |
       $(Build.BuildId)
