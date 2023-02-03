@@ -36,7 +36,7 @@ steps:
         "files": [
           {
             "pattern": "dockerimages/docker-base-image/jdk/11-mariner/*", 
-            "target": "$(System.DefaultWorkingDirectory)/"
+            "target": "$(System.DefaultWorkingDirectory)/tmp"
           }
         ]
       }
@@ -47,7 +47,7 @@ steps:
       # Write your commands here
       mkdir -p $(System.DefaultWorkingDirectory)/tmp
       cp *.jar $(System.DefaultWorkingDirectory)/tmp
-      cp 11-mariner $(System.DefaultWorkingDirectory)/tmp
+      # cp 11-mariner $(System.DefaultWorkingDirectory)/tmp
       pwd
       cp dockerfile $(System.DefaultWorkingDirectory)/tmp
     
