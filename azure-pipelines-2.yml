@@ -7,9 +7,6 @@
 trigger:
 - none
 
-variables:
-- group: Azure-Container-CI 
-
 pool:
   name: Azure-Infra_Pool
 
