@@ -25,6 +25,21 @@ steps:
           }
         ]
       }
+
+- task: JFrogGenericArtifacts@1
+  inputs:
+    command: 'Download'
+    connection: 'rba_jfrog_token'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "dockerimages/docker-base-image/jdk/11-mariner", 
+            "target": "$(System.DefaultWorkingDirectory)/"
+          }
+        ]
+      }
 - task: Bash@3
   inputs:
     targetType: 'inline'
