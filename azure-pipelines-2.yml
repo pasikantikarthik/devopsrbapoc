@@ -35,7 +35,7 @@ steps:
       {
         "files": [
           {
-            "pattern": "dockerimages/docker-base-image/jdk/11-mariner", 
+            "pattern": "dockerimages/docker-base-image/jdk/11-mariner/", 
             "target": "$(System.DefaultWorkingDirectory)/"
           }
         ]
