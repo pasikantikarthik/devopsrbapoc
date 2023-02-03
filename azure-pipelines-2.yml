@@ -1,0 +1,49 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- none
+
+variables:
+- group: Azure-Container-CI 
+
+pool:
+  name: Azure-Infra_Pool
+
+steps:
+- task: JFrogGenericArtifacts@1
+  inputs:
+    command: 'Download'
+    connection: 'rba_jfrog_token'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "rba-repo/spring-boot-2.6.9.jar", 
+            "target": "$(System.DefaultWorkingDirectory)/"
+          }
+        ]
+      }
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      mkdir -p $(System.DefaultWorkingDirectory)/tmp
+      cp *.jar $(System.DefaultWorkingDirectory)/tmp
+      pwd
+      cp dockerfile $(System.DefaultWorkingDirectory)/tmp
+    
+# - task: Docker@2
+#   inputs:
+#      command: build
+#      Dockerfile: '$(System.DefaultWorkingDirectory)/tmp/dockerfile'
+#      containerRegistry: $(docker_Registry_service_Connection)
+#      repository: '$(JFrog_repository)/$(rba-image)'
+#      tags: |
+#        $(Build.BuildId)
+#      arguments: '--disable-content-trust=false'
