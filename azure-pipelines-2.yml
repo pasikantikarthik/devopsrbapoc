@@ -35,12 +35,12 @@ steps:
       pwd
       cp dockerfile $(System.DefaultWorkingDirectory)/tmp
     
-# - task: Docker@2
-#   inputs:
-#      command: build
-#      Dockerfile: '$(System.DefaultWorkingDirectory)/tmp/dockerfile'
-#      containerRegistry: $(docker_Registry_service_Connection)
-#      repository: '$(JFrog_repository)/$(rba-image)'
-#      tags: |
-#        $(Build.BuildId)
-#      arguments: '--disable-content-trust=false'
+- task: Docker@2
+  inputs:
+    command: build
+    Dockerfile: '$(System.DefaultWorkingDirectory)/tmp/dockerfile'
+    containerRegistry: $(docker_Registry_service_Connection)
+    repository: 'dockerimages/dummyimage'
+    tags: |
+      $(Build.BuildId)
+    arguments: '--disable-content-trust=false'
