@@ -1,5 +1,6 @@
 #FROM openjdk:11
-FROM mcr.microsoft.com/openjdk/jdk:11-mariner
+#FROM mcr.microsoft.com/openjdk/jdk:11-mariner
+FROM 11-mariner
 VOLUME /tmp
 EXPOSE 8080
 COPY spring-boot-2.6.9.jar spring-boot-2.6.9.jar
